@@ -276,6 +276,38 @@
       #define LCD_PINS_D7            EXP1_01_PIN
       #define ADC_KEYPAD_PIN                PA1   // Repurpose servo pin for ADC - CONNECTING TO 5V WILL DAMAGE THE BOARD!
 
+
+    #elif ENABLED(ANET_FULL_GRAPHICS_LCD)         // ANET A8 LCD Controller - Need to invert 5V and GND in the cable!
+
+      /**
+       * ANET_FULL_GRAPHICS_LCD pinouts
+       *
+       *          ------                      ------
+       *     GND | 1  2 | 5V               - | 1  2 | -
+       *  LCD_RS | 3  4 | BTN_EN2          - | 3  4 | 5V
+       *  LCD_EN   5  6 | BTN_EN1          -   5  6 | -
+       *  SERVO0 | 7  8 | BTN_ENC      RESET | 7  8 | GND
+       *  LCD_D4 | 9 10 | BEEPER_PIN       - | 9 10 | 3V3
+       *          ------                      ------
+       *           LCD                          J3
+       */
+      //#define SERVO0_PIN             EXP1_04_PIN  // Free for BLTouch/3D-Touch
+
+      #define BEEPER_PIN             EXP1_01_PIN
+
+      #define BTN_ENC                EXP1_03_PIN
+      #define BTN_EN1                EXP1_05_PIN
+      #define BTN_EN2                EXP1_07_PIN
+
+      #define LCD_PINS_RS            EXP1_08_PIN
+      #define LCD_PINS_EN            EXP1_06_PIN
+      #define LCD_PINS_D4            EXP1_02_PIN
+
+      #define BOARD_ST7920_DELAY_1           125
+      #define BOARD_ST7920_DELAY_2            63
+      #define BOARD_ST7920_DELAY_3           125    
+    
+    
     #elif ANY(MKS_MINI_12864, ENDER2_STOCKDISPLAY)
 
       #define BTN_ENC                EXP1_02_PIN
@@ -374,7 +406,7 @@
       #define LCD_BACKLIGHT_PIN             -1
 
     #else
-      #error "Only CR10_STOCKDISPLAY, ZONESTAR_LCD, ENDER2_STOCKDISPLAY, MKS_MINI_12864, FYSETC_MINI_12864_2_1, and TFTGLCD_PANEL_(SPI|I2C) are currently supported on the SKR Mini E3."
+      #error "Only CR10_STOCKDISPLAY, ZONESTAR_LCD, ANET_FULL_GRAPHICS_LCD, ENDER2_STOCKDISPLAY, MKS_MINI_12864, FYSETC_MINI_12864_2_1, and TFTGLCD_PANEL_(SPI|I2C) are currently supported on the SKR Mini E3."
     #endif
 
   #endif // SKR_MINI_SCREEN_ADAPTER
